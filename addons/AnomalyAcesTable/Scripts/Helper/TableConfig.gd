@@ -3,9 +3,6 @@ extends Node
 #Array of Column Defs to define what Columns Names and Column id of the data entered
 var columnDefs: Dictionary
 
-#Array of Dictionaries containing the data that matches the Column Defs given
-var data: Array
-
 #Optional Defintions for nodes supported by the table. If provided these will be used instead of the defaults
 #enum ColumnType {
 #	LABEL,
@@ -15,9 +12,8 @@ var data: Array
 var columnNodeDefs: ColumnNodeDefs
 
 
-func _init(colDefs: Dictionary, dt: Array, colNodeDefs: Dictionary = {}):
+func _init(colDefs: Dictionary, colNodeDefs: Dictionary = {}):
 	columnDefs = colDefs
-	data = dt
 	columnNodeDefs = ColumnNodeDefs.new(colNodeDefs)
 
 class ColumnNodeDefs:
