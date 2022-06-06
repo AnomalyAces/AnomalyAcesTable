@@ -11,7 +11,7 @@
 A Godot addon designed to create a customiziable table where you can desgin its different parts using Godot themes
 
 
-## Versions
+## Versions 
 
 Versions can be located here
 
