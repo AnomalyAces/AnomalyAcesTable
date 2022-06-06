@@ -10,3 +10,6 @@ func createTableConfig(colDefs: Dictionary, dt: Array, colNodeDefs: Dictionary =
 
 func createTable(parent: Plugin, tblCfg: Config):
 	return Table.new(parent, tblCfg)
+
+func setTableData(table: Table, data: Array):
+	table.set_data(data)

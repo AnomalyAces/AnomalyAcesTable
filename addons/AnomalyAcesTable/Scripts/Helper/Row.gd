@@ -27,7 +27,7 @@ func _init(tblCfg: TableConfig, dt: Dictionary, rowScene: PanelContainer):
 					var label: Label = _getLabelFromConfig(tblCfg, dt, colDef)
 					_cellContainer.add_child(label)
 				TableConstants.ColumnType.BUTTON:
-					var button: Button = _getButtonFromConfig(tblCfg, dt, colDef)
+					var button: BaseButton = _getButtonFromConfig(tblCfg, dt, colDef)
 					_cellContainer.add_child(button)
 				TableConstants.ColumnType.TEXTURE_RECT:
 					var image = _getTextureRectFromConfig(tblCfg, dt, colDef)
@@ -60,11 +60,20 @@ func _getLabelFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColum
 		label.size_flags_horizontal = SIZE_EXPAND_FILL
 	
 	return label
-	
-func _getButtonFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColumnDef) -> Button: 
+
+func _getButtonType(colDef: TableColumnDef, dt: Dictionary) -> BaseButton:
+	if(!colDef.columnImage.empty() && dt.get(colDef.columnId).empty()):
+		var textureButton: TextureButton = TextureButton.new()
+		return textureButton
+	else:
+		var button : Button = Button.new()
+		return button
+
+func _getButtonFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColumnDef) -> BaseButton: 
 	var button: Button
+	
 	if(tblCfg.columnNodeDefs.button != null):
-		button = tblCfg.columnNodeDefs.button
+		button = tblCfg.columnNodeDefs.button as Button
 		button.name = colDef.columnId
 		button.text = dt[colDef.columnId]
 	else:
@@ -75,7 +84,10 @@ func _getButtonFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColu
 		button.connect("pressed", self, "_on_Button_pressed", [colDef.columnFunc, dt])
 		if(!colDef.columnImage.empty()):
 			button.set_button_icon(load(colDef.columnImage))
+		
 	return button
+		
+	
 
 func _getTextureRectFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColumnDef) -> TextureRect:
 	var textureRect: TextureRect

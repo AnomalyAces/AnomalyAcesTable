@@ -16,7 +16,7 @@ A Godot addon designed to create a customiziable table where you can desgin its 
 Versions can be located here
 
 ## How To Use
-Please refer to the wiki for a how to use guide
+Please refer to the [wiki](https://github.com/AnomalyAces/AnomalyAcesTable/wiki/User-Guide) for a how to use guide
 
 ## License
 Please refer to the LICENSE file located in the repo

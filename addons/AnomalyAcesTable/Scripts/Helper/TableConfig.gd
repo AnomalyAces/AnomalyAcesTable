@@ -22,7 +22,7 @@ func _init(colDefs: Dictionary, dt: Array, colNodeDefs: Dictionary = {}):
 
 class ColumnNodeDefs:
 	var label: Label
-	var button: Button
+	var button: BaseButton
 	var textureRect: TextureRect
 	
 	func _init(colNodeDefs: Dictionary):
