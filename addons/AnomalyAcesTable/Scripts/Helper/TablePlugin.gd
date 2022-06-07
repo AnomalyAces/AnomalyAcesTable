@@ -3,7 +3,6 @@ extends Control
 
 var table_header_theme: Theme
 var table_header_cell_theme: Theme
-var table_header_cell_alignment: int
 var table_row_theme: Theme
 var table_row_cell_theme: Theme
 
@@ -31,12 +30,6 @@ func _get_property_list():
 			"hint_string": "Theme"
 		},
 		{
-			"name": "table_header_cell_alignment",
-			"type": TYPE_INT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": "Theme"
-		},
-		{
 			"name": "table_row_theme",
 			"type": TYPE_OBJECT,
 			"hint": PROPERTY_HINT_RESOURCE_TYPE,
@@ -47,7 +40,7 @@ func _get_property_list():
 			"type": TYPE_OBJECT,
 			"hint": PROPERTY_HINT_RESOURCE_TYPE,
 			"hint_string": "Theme"
-		}
+		},
 	]
 
 func _to_string():

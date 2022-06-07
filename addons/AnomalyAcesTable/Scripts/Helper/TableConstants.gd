@@ -5,3 +5,9 @@ enum ColumnType {
 	BUTTON,
 	TEXTURE_RECT
 }
+
+enum Align {
+	LEFT,
+	CENTER,
+	RIGHT
+}

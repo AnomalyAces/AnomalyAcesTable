@@ -78,6 +78,7 @@ func _createColumnHeaders():
 		label.name = colDef.columnId
 		label.size_flags_horizontal = SIZE_EXPAND_FILL
 		label.valign = Label.VALIGN_CENTER
+		label.align = colDef.columnAlign
 		_columnHeaderContainer.add_child(label)
 	
 #	var blankLabel = Label.new()

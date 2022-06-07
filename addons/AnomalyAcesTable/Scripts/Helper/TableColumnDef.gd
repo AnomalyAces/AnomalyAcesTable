@@ -5,6 +5,7 @@ const INVALID_TYPE: int = -1
 var columnName: String
 var columnId: String
 var columnType: int
+var columnAlign: int
 var columnImage: String
 var columnFunc: FuncRef
 
@@ -23,6 +24,10 @@ func _init(colDef: Dictionary):
 			columnImage = colDef.columnImage
 		if(colDef.has("columnFunc") && colDef.columnFunc != null):
 			columnFunc = colDef.columnFunc
+		if(colDef.has("columnAlign")):
+			columnAlign = colDef.columnAlign
+		else:
+			columnAlign = 0
 	else:
 		columnType = INVALID_TYPE
 		push_error("Column Def %s does not contain one or more of the following members: 'columnId', 'columnName', 'columnType' " % [colDef])

@@ -58,16 +58,9 @@ func _getLabelFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColum
 		label.text = dt[colDef.columnId]
 		label.name = colDef.columnId
 		label.size_flags_horizontal = SIZE_EXPAND_FILL
+		label.align = colDef.columnAlign
 	
 	return label
-
-func _getButtonType(colDef: TableColumnDef, dt: Dictionary) -> BaseButton:
-	if(!colDef.columnImage.empty() && dt.get(colDef.columnId).empty()):
-		var textureButton: TextureButton = TextureButton.new()
-		return textureButton
-	else:
-		var button : Button = Button.new()
-		return button
 
 func _getButtonFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColumnDef) -> BaseButton: 
 	var button: Button
@@ -81,6 +74,7 @@ func _getButtonFromConfig(tblCfg: TableConfig, dt: Dictionary, colDef: TableColu
 		button.text = dt[colDef.columnId]
 		button.name = colDef.columnId
 		button.size_flags_horizontal = SIZE_EXPAND_FILL
+		button.align = colDef.columnAlign
 		button.connect("pressed", self, "_on_Button_pressed", [colDef.columnFunc, dt])
 		if(!colDef.columnImage.empty()):
 			button.set_button_icon(load(colDef.columnImage))
