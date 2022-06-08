@@ -37,7 +37,7 @@ func _init(parent: Plugin, tblCfg: Config):
 	tableConfig = tblCfg
 	plugin = parent
 	
-	parent.add_child(_table.instance())
+	plugin.add_child(_table.instance())
 	
 	#Column Config
 	
@@ -52,6 +52,7 @@ func _init(parent: Plugin, tblCfg: Config):
 	##Resize the Container
 	_columnHeaderContainer = plugin.get_node("VBoxContainer/ColumnHeaderPC/MarginContainer/PanelContainer/HBoxContainer")
 	_columnHeaderContainer.size_flags_horizontal = SIZE_EXPAND_FILL
+	_columnHeaderContainer.add_constant_override("separation", parent.table_cell_separation)
 	
 	#Row Config
 	
@@ -94,4 +95,4 @@ func set_data(dataArr:Array):
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)
 		
-		Row.new(tableConfig, dataArr[dataIdx], rowScene)
+		Row.new(plugin, tableConfig, dataArr[dataIdx], rowScene)

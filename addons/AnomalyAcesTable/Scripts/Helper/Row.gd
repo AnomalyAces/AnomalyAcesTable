@@ -3,14 +3,16 @@ signal pressed
 
 const TableConfig = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TableConfig.gd")
 const TableColumnDef = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TableColumnDef.gd")
+const Plugin = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TablePlugin.gd")
 
 var _cellContainer: HBoxContainer
 
 var colDefs: Array = []
 
-func _init(tblCfg: TableConfig, dt: Dictionary, rowScene: PanelContainer):
+func _init(plugin:Plugin, tblCfg: TableConfig, dt: Dictionary, rowScene: PanelContainer):
 	
 	_cellContainer = rowScene.get_node("MarginContainer/Row")
+	_cellContainer.add_constant_override("separation", plugin.table_cell_separation)
 	
 	for key in tblCfg.columnDefs:
 		var colDefDict: Dictionary = tblCfg.columnDefs[key]

@@ -5,6 +5,7 @@ var table_header_theme: Theme
 var table_header_cell_theme: Theme
 var table_row_theme: Theme
 var table_row_cell_theme: Theme
+var table_cell_separation: int
 
 func _print(args):
 	print(args)
@@ -40,6 +41,11 @@ func _get_property_list():
 			"type": TYPE_OBJECT,
 			"hint": PROPERTY_HINT_RESOURCE_TYPE,
 			"hint_string": "Theme"
+		},
+		{
+			"name": "table_cell_separation",
+			"type": TYPE_INT,
+			"hint":  PROPERTY_HINT_NONE
 		},
 	]
 
