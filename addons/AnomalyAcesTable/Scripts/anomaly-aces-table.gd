@@ -7,6 +7,12 @@ func _enter_tree():
 	add_custom_type("Table", "Control",preload("Helper/TablePlugin.gd"), preload("../AnomalyAcesTable.svg"))
 	
 	#Add singletons
+#	add_autoload_singleton("TableColumnDef","res://addons/AnomalyAcesTable/Scripts/Helper/TableColumnDef.gd" )
+#	add_autoload_singleton("TableConfig", "res://addons/AnomalyAcesTable/Scripts/Helper/TableConfig.gd")
+#	add_autoload_singleton("TablePlugin", "res://addons/AnomalyAcesTable/Scripts/Helper/TablePlugin.gd")
+#	add_autoload_singleton("TableRow", "res://addons/AnomalyAcesTable/Scripts/Helper/TableRow.gd")
+#	add_autoload_singleton("Table", "res://addons/AnomalyAcesTable/Scripts/Helper/Table.gd")
+	
 	add_autoload_singleton("TableManager", "res://addons/AnomalyAcesTable/Scripts/TableManager.gd")
 	add_autoload_singleton("TableConstants", "res://addons/AnomalyAcesTable/Scripts/Helper/TableConstants.gd")
 	
@@ -18,5 +24,11 @@ func _exit_tree():
 	remove_custom_type("Table")
 	
 	#Remove Singletons
+#	remove_autoload_singleton("TableColumnDef")
+#	remove_autoload_singleton("TableConfig")
+#	remove_autoload_singleton("TablePlugin")
+#	remove_autoload_singleton("TableRow")
+#	remove_autoload_singleton("Table")
+	
 	remove_autoload_singleton("TableManager")
 	remove_autoload_singleton("TableConstants")

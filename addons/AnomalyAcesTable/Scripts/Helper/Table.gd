@@ -1,9 +1,5 @@
 extends Control
-
-const Row = preload("res://addons/AnomalyAcesTable/Scripts/Helper/Row.gd")
-const Config = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TableConfig.gd")
-const ColumnDef = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TableColumnDef.gd")
-const Plugin = preload("res://addons/AnomalyAcesTable/Scripts/Helper/TablePlugin.gd")
+class_name Table, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
 var _row = load("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
 var _table = load("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
@@ -18,8 +14,8 @@ var _rowContainer : VBoxContainer
 var _rowPanel: PanelContainer
 var _rowCellPanel: PanelContainer
 
-var plugin: Plugin
-var tableConfig : Config
+var plugin: TablePlugin
+var tableConfig : TableConfig
 
 var sn = 0
 var data = [
@@ -31,7 +27,7 @@ var data = [
 	}
 ]
 
-func _init(parent: Plugin, tblCfg: Config):
+func _init(parent: TablePlugin, tblCfg: TableConfig):
 	print("init with config called")
 	
 	tableConfig = tblCfg
@@ -72,7 +68,7 @@ func _createColumnHeaders():
 	#add columns to 
 	for col_key in tableConfig.columnDefs:
 		var colDict = tableConfig.columnDefs[col_key]
-		var colDef: ColumnDef = ColumnDef.new(colDict)
+		var colDef: TableColumnDef = TableColumnDef.new(colDict)
 	
 		var label = Label.new()
 		label.text = colDef.columnName
@@ -95,4 +91,4 @@ func set_data(dataArr:Array):
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)
 		
-		Row.new(plugin, tableConfig, dataArr[dataIdx], rowScene)
+		TableRow.new(plugin, tableConfig, dataArr[dataIdx], rowScene)

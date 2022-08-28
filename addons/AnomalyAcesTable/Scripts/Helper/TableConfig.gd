@@ -1,4 +1,5 @@
 extends Node
+class_name TableConfig, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
 #Array of Column Defs to define what Columns Names and Column id of the data entered
 var columnDefs: Dictionary

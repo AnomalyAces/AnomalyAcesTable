@@ -1,4 +1,5 @@
 extends Node
+class_name TableColumnDef, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
 const INVALID_TYPE: int = -1
 
