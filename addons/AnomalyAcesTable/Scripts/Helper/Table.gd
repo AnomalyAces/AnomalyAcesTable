@@ -3,6 +3,7 @@ class_name Table, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
 var _row = load("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
 var _table = load("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
+var _sorter = load("res://addons/AnomalyAcesTable/Scripts/Helper/TableSorter.gd").new()
 
 #Column Headers
 var _columnHeaderContainer: HBoxContainer
@@ -69,14 +70,21 @@ func _createColumnHeaders():
 	for col_key in tableConfig.columnDefs:
 		var colDict = tableConfig.columnDefs[col_key]
 		var colDef: TableColumnDef = TableColumnDef.new(colDict)
-	
-		var label = Label.new()
-		label.text = colDef.columnName
-		label.name = colDef.columnId
-		label.size_flags_horizontal = SIZE_EXPAND_FILL
-		label.valign = Label.VALIGN_CENTER
-		label.align = colDef.columnAlign
-		_columnHeaderContainer.add_child(label)
+		
+		var node_header: Control
+		
+		if colDef.columnSort:
+			node_header = Button.new()
+			(node_header as Button).connect("pressed", _sorter, "sort_row_by_column", [self, col_key, TableConstants.ColumnSort.SORT_ASCENDING])
+		else:
+			node_header = Label.new()
+			node_header.valign = Label.VALIGN_CENTER
+		
+		node_header.text = colDef.columnName
+		node_header.name = colDef.columnId
+		node_header.size_flags_horizontal = SIZE_EXPAND_FILL
+		node_header.align = colDef.columnAlign
+		_columnHeaderContainer.add_child(node_header)
 	
 #	var blankLabel = Label.new()
 #	blankLabel.name = "Blank"
@@ -91,4 +99,8 @@ func set_data(dataArr:Array):
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)
 		
-		TableRow.new(plugin, tableConfig, dataArr[dataIdx], rowScene)
+		rowScene.setup(plugin, tableConfig, dataArr[dataIdx], rowScene)
+
+
+func get_rows():
+	return _rowContainer.get_children()

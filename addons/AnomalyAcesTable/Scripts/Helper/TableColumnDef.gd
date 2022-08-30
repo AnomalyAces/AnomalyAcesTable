@@ -6,6 +6,7 @@ const INVALID_TYPE: int = -1
 var columnName: String
 var columnId: String
 var columnType: int
+var columnSort: bool = false
 var columnAlign: int
 var columnImage: String
 var columnFunc: FuncRef
@@ -21,6 +22,8 @@ func _init(colDef: Dictionary):
 		else:
 			columnType = TableConstants.ColumnType.LABEL
 		
+		if(colDef.has("columnSort")):
+			columnSort = colDef.columnSort
 		if(colDef.has("columnImage") && !colDef.columnImage.empty()):
 			columnImage = colDef.columnImage
 		if(colDef.has("columnFunc") && colDef.columnFunc != null):
