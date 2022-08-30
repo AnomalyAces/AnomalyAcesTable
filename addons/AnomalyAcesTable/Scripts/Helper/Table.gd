@@ -75,7 +75,7 @@ func _createColumnHeaders():
 		
 		if colDef.columnSort:
 			node_header = Button.new()
-			(node_header as Button).connect("pressed", _sorter, "sort_row_by_column", [self, col_key, TableConstants.ColumnSort.SORT_ASCENDING])
+			(node_header as Button).connect("pressed", self, "_on_column_header_pressed_ascending", [node_header, col_key])
 		else:
 			node_header = Label.new()
 			node_header.valign = Label.VALIGN_CENTER
@@ -104,3 +104,16 @@ func set_data(dataArr:Array):
 
 func get_rows():
 	return _rowContainer.get_children()
+	
+
+func _on_column_header_pressed_ascending(node_header, col_key):
+	_sorter.sort_row_by_column(self, col_key, TableConstants.ColumnSort.SORT_ASCENDING)
+
+	node_header.disconnect("pressed", self, "_on_column_header_pressed_ascending")
+	node_header.connect("pressed", self, "_on_column_header_pressed_descending", [node_header, col_key])
+
+func _on_column_header_pressed_descending(node_header, col_key):
+	_sorter.sort_row_by_column(self, col_key, TableConstants.ColumnSort.SORT_DESCENDING)
+	
+	node_header.disconnect("pressed", self, "_on_column_header_pressed_descending")
+	node_header.connect("pressed", self, "_on_column_header_pressed_ascending", [node_header, col_key])
