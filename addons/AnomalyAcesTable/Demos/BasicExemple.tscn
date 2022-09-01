@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/AnomalyAcesTable/Scripts/Helper/TablePlugin.gd" type="Script" id=1]
+[ext_resource path="res://addons/AnomalyAcesTable/Demos/BasicExemple.gd" type="Script" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Table" type="Control" parent="."]
+anchor_left = 0.0625
+anchor_top = 0.106667
+anchor_right = 0.9375
+anchor_bottom = 0.853333
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+table_header_theme = null
+table_header_cell_theme = null
+table_row_theme = null
+table_row_cell_theme = null
+table_cell_separation = 0
