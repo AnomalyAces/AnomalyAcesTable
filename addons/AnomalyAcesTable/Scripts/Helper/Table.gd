@@ -94,13 +94,13 @@ func _createColumnHeaders():
 
 
 func set_data(dataArr:Array):
-	var rowScene = _row.instance()
 	for dataIdx in dataArr.size():
+		var rowScene = _row.instance()
 		rowScene.name = "Row"+str(dataIdx)
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)
 		
-		rowScene.setup(plugin, tableConfig, dataArr[dataIdx], rowScene)
+		TableRow.new(plugin, tableConfig, dataArr[dataIdx], rowScene)
 
 
 func get_rows():

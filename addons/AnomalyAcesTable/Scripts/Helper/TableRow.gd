@@ -17,7 +17,7 @@ func _init(plugin:TablePlugin=null, tblCfg: TableConfig=null, dt: Dictionary = {
 	if(plugin == null || tblCfg == null || rowScene == null):
 		return
 
-  rowScene.data = dt
+	rowScene.data = dt
 	
 	_cellContainer = rowScene.get_node("MarginContainer/Row")
 	_cellContainer.add_constant_override("separation", plugin.table_cell_separation)
