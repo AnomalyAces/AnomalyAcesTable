@@ -6,8 +6,14 @@ signal pressed
 var _cellContainer: HBoxContainer
 
 var colDefs: Array = []
+var defaultPlugin = TablePlugin.new()
+var defaultConfig = TableConfig.new()
 
-func _init(plugin:TablePlugin, tblCfg: TableConfig, dt: Dictionary, rowScene: PanelContainer):
+
+func _init(plugin:TablePlugin=null, tblCfg: TableConfig=null, dt: Dictionary = {}, rowScene = null):
+	
+	if(plugin == null || tblCfg == null || rowScene == null):
+		return
 	
 	_cellContainer = rowScene.get_node("MarginContainer/Row")
 	_cellContainer.add_constant_override("separation", plugin.table_cell_separation)

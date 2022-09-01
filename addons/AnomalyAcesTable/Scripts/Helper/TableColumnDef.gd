@@ -11,7 +11,7 @@ var columnImage: String
 var columnFunc: FuncRef
 
 
-func _init(colDef: Dictionary):
+func _init(colDef: Dictionary = {}):
 	if(_validateColDef(colDef)):
 		columnId = colDef.columnId
 		columnName = colDef.columnName
