@@ -1,9 +1,10 @@
 extends Control
 class_name Table, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
-var _row = load("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
-var _table = load("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
+var _row = preload("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
+var _table = preload("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
 var _sorter = load("res://addons/AnomalyAcesTable/Scripts/Helper/TableSorter.gd").new()
+
 
 #Column Headers
 var _columnHeaderContainer: HBoxContainer
@@ -28,7 +29,11 @@ var data = [
 	}
 ]
 
-func _init(parent: TablePlugin, tblCfg: TableConfig):
+func _init(parent: TablePlugin = null, tblCfg: TableConfig = null):
+	
+	if(parent == null || tblCfg == null):
+		return
+	
 	print("init with config called")
 	
 	tableConfig = tblCfg
@@ -86,15 +91,11 @@ func _createColumnHeaders():
 		node_header.align = colDef.columnAlign
 		_columnHeaderContainer.add_child(node_header)
 	
-#	var blankLabel = Label.new()
-#	blankLabel.name = "Blank"
-#	blankLabel.size_flags_horizontal = SIZE_EXPAND_FILL
-#	_tableColumnHeaderContainer.add_child(blankLabel)
 
 
 func set_data(dataArr:Array):
+	var rowScene = _row.instance()
 	for dataIdx in dataArr.size():
-		var rowScene: PanelContainer = _row.instance()
 		rowScene.name = "Row"+str(dataIdx)
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)

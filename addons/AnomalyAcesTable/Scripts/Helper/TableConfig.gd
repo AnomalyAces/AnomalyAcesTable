@@ -13,7 +13,7 @@ var columnDefs: Dictionary
 var columnNodeDefs: ColumnNodeDefs
 
 
-func _init(colDefs: Dictionary, colNodeDefs: Dictionary = {}):
+func _init(colDefs: Dictionary = {}, colNodeDefs: Dictionary = {}):
 	columnDefs = colDefs
 	columnNodeDefs = ColumnNodeDefs.new(colNodeDefs)
 

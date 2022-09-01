@@ -8,10 +8,16 @@ var _cellContainer: HBoxContainer
 var colDefs: Array = []
 var data: Dictionary
 
+var defaultPlugin = TablePlugin.new()
+var defaultConfig = TableConfig.new()
 
-func setup(plugin: TablePlugin, tblCfg: TableConfig, dt: Dictionary, rowScene: PanelContainer):
+
+func _init(plugin:TablePlugin=null, tblCfg: TableConfig=null, dt: Dictionary = {}, rowScene = null):
 	
-	rowScene.data = dt
+	if(plugin == null || tblCfg == null || rowScene == null):
+		return
+
+  rowScene.data = dt
 	
 	_cellContainer = rowScene.get_node("MarginContainer/Row")
 	_cellContainer.add_constant_override("separation", plugin.table_cell_separation)
