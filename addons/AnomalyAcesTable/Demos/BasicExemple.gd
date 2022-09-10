@@ -5,8 +5,8 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var table: TableManager.Table
-var tablePlugin: TableManager.Plugin
+var table: Table
+var tablePlugin: TablePlugin
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +15,7 @@ func _ready():
 		"foo":{
 			"columnId": "foo",
 			"columnName": "Foo",
+			"columnSort": true,
 			"columnType": TableConstants.ColumnType.LABEL,
 						"columnAlign": TableConstants.Align.CENTER
 		},
@@ -41,6 +42,18 @@ func _ready():
 			"foobar": "res://icon.png"
 		}
 	
+	var data2 = {
+			"foo":"15",
+			"bar":"Press Me",
+			"foobar": "res://icon.png"
+		}
+		
+	var data3 = {
+			"foo":"11",
+			"bar":"Press Me",
+			"foobar": "res://icon.png"
+		}
+	
 	var textRect = TextureRect.new()
 	textRect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	textRect.size_flags_horizontal = SIZE_EXPAND_FILL
@@ -49,9 +62,9 @@ func _ready():
 		"textureRect": textRect
 	}
 	
-	var tblConfig : TableManager.Config = TableManager.createTableConfig(colDefs, data)
+	var tblConfig : TableConfig = TableManager.createTableConfig(colDefs, data)
 	table = TableManager.createTable(tablePlugin, tblConfig)
-	TableManager.setTableData(table, [data, data, data])
+	TableManager.setTableData(table, [data, data2, data3])
 	
 	print(tablePlugin.to_string())
 

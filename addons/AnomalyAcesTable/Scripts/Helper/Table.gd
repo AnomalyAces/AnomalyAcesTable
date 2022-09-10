@@ -1,8 +1,10 @@
 extends Control
 class_name Table, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
 
-const _row = preload("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
-const _table = preload("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
+var _row = preload("res://addons/AnomalyAcesTable/Scenes/Row.tscn")
+var _table = preload("res://addons/AnomalyAcesTable/Scenes/Table.tscn")
+var _sorter = load("res://addons/AnomalyAcesTable/Scripts/Helper/TableSorter.gd").new()
+
 
 #Column Headers
 var _columnHeaderContainer: HBoxContainer
@@ -73,22 +75,46 @@ func _createColumnHeaders():
 	for col_key in tableConfig.columnDefs:
 		var colDict = tableConfig.columnDefs[col_key]
 		var colDef: TableColumnDef = TableColumnDef.new(colDict)
-	
-		var label = Label.new()
-		label.text = colDef.columnName
-		label.name = colDef.columnId
-		label.size_flags_horizontal = SIZE_EXPAND_FILL
-		label.valign = Label.VALIGN_CENTER
-		label.align = colDef.columnAlign
-		_columnHeaderContainer.add_child(label)
+		
+		var node_header: Control
+		
+		if colDef.columnSort:
+			node_header = Button.new()
+			(node_header as Button).connect("pressed", self, "_on_column_header_pressed_ascending", [node_header, col_key])
+		else:
+			node_header = Label.new()
+			node_header.valign = Label.VALIGN_CENTER
+		
+		node_header.text = colDef.columnName
+		node_header.name = colDef.columnId
+		node_header.size_flags_horizontal = SIZE_EXPAND_FILL
+		node_header.align = colDef.columnAlign
+		_columnHeaderContainer.add_child(node_header)
 	
 
 
 func set_data(dataArr:Array):
-	var rowScene = _row.instance()
 	for dataIdx in dataArr.size():
+		var rowScene = _row.instance()
 		rowScene.name = "Row"+str(dataIdx)
 		rowScene.set_theme(plugin.table_row_cell_theme)
 		_rowContainer.add_child(rowScene)
 		
 		TableRow.new(plugin, tableConfig, dataArr[dataIdx], rowScene)
+
+
+func get_rows():
+	return _rowContainer.get_children()
+	
+
+func _on_column_header_pressed_ascending(node_header, col_key):
+	_sorter.sort_row_by_column(self, col_key, TableConstants.ColumnSort.SORT_ASCENDING)
+
+	node_header.disconnect("pressed", self, "_on_column_header_pressed_ascending")
+	node_header.connect("pressed", self, "_on_column_header_pressed_descending", [node_header, col_key])
+
+func _on_column_header_pressed_descending(node_header, col_key):
+	_sorter.sort_row_by_column(self, col_key, TableConstants.ColumnSort.SORT_DESCENDING)
+	
+	node_header.disconnect("pressed", self, "_on_column_header_pressed_descending")
+	node_header.connect("pressed", self, "_on_column_header_pressed_ascending", [node_header, col_key])
