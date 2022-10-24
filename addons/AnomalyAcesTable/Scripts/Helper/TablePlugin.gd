@@ -1,6 +1,6 @@
 tool
 extends Control
-class_name TablePlugin, "res://addons/AnomalyAcesTable/Scripts/Helper/NoIcon.svg"
+class_name TablePlugin
 
 var table_header_theme: Theme
 var table_header_cell_theme: Theme
